@@ -21,11 +21,11 @@ export const LectureProvider = ({ children }) => {
 
 
   const updateLectureData = (newLecture) => {
-    setLectures([...lectureData, newLecture]);
+    setLectureData([...lectureData, newLecture]);
   };
 
   const updateLectureSummary = (newLecture) => {
-    setLectures([...lectureSummary, newLecture]);
+    setLectureSummary([...lectureSummary, newLecture]);
   };
 
   return (

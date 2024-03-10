@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, Image, TouchableOpacity, SafeAreaView , ScrollView} from 'react-native';
 import style from './style';
 import { useAppContext } from '../../context/AppContext';
 import TreeView from 'react-native-final-tree-view';
@@ -14,47 +14,39 @@ const Clarify = ({navigation}) => {
 
  
   const { lectureData } = useLecture();
-  // Use lectureData here
-  // const { lectureTitle, lectureContent, clarification } = lectureData;
   
 
   return (
     <SafeAreaView style={style.container}>
     <Text style={style.title}> Clarification History </Text>
 
-    {/* <List.Section title="">
-    {lectureTitle && (
-      <List.Accordion
-        style={{width: 400}}
-        title={lectureTitle}
-        left={props => <List.Icon {...props} icon="book" />}
-      >
-
-      <List.Section style={{width: 300, height: 200}}>
-        <List.Subheader>Term: {lectureContent} </List.Subheader>
-        <List.Subheader>Clarification: {clarification} </List.Subheader>
-      </List.Section>
-    </List.Accordion>
-  )}
-</List.Section> */}
+    <ScrollView style={{ width: '100%' }}> 
  <List.Section title="">
         {lectureData.map((lecture, index) => (
           <List.Accordion
             style={{width: 400}}
             key={index} // Using index as a key; consider changing if the list is dynamic
             title={lecture.lectureTitle}
+            titleNumberOfLines={3}
             left={props => <List.Icon {...props} icon="book" />}
           >
-            <List.Section>
-              <List.Subheader>Term: {lecture.lectureContent}</List.Subheader>
-              <List.Subheader>Clarification: {lecture.clarification}</List.Subheader>
-            </List.Section>
+
+        <List.Item         
+          titleNumberOfLines={15}
+          title={`Term: ${lecture.lectureContent}`}
+          >
+        </List.Item>
+        
+        <List.Item         
+        titleNumberOfLines={100}
+        title={`Clarification: ${lecture.clarification}`}
+        >
+        </List.Item>
           </List.Accordion>
         ))}
       </List.Section>
 
-
-
+</ScrollView>
 
     <TouchableOpacity
         style={style.button}
