@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Keyboard, StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
+import { Keyboard, StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
 import { Audio } from 'expo-av';
+import { TextInput } from 'react-native-paper';
 
 export default function Dashboard() {
   const [lectureTitle, setLectureTitle] = useState(''); // For naming the lecture recording
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   textInputContent: {
-    height: 150,
+    height: 100,
     borderColor: 'gray',
     borderWidth: 1,
     width: '90%',
