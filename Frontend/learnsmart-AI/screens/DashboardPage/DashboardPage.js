@@ -43,7 +43,10 @@ export default function Dashboard({navigation}) {
           }),
         });
         const data = await response.json();
-        updateLectureData({ lectureTitle: lectureTitle, lectureContent: lectureContent, clarification: data.text });
+
+        const clarificationLinks = data.documents.map(doc => doc.url.trim());
+
+        updateLectureData({ lectureTitle: lectureTitle, lectureContent: lectureContent, clarification: data.text, clarificationLinks: clarificationLinks });
 
         navigation.navigate('Clarify');
         // Optionally, navigate to a screen that uses this data from context

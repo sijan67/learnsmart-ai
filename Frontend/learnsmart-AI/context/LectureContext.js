@@ -8,8 +8,8 @@ export const useLecture = () => useContext(LectureContext);
 
 export const LectureProvider = ({ children }) => {
   const [lectureData, setLectureData] = useState([
-    { lectureTitle: 'Dummy Title 1', lectureContent: 'Dummy Content 1', clarification: 'Dummy Clarification 1' },
-    { lectureTitle: 'Dummy Title 2', lectureContent: 'Dummy Content 2', clarification: 'Dummy Clarification 2' },
+    { lectureTitle: 'Dummy Title 1', lectureContent: 'Dummy Content 1',  clarification: 'Dummy Clarification 1', clarificationLinks: ['http://github.com/', 'http://sijanpoudel.com/']},
+    { lectureTitle: 'Dummy Title 2', lectureContent: 'Dummy Content 2',clarification: 'Dummy Clarification 1', clarificationLinks: ['http://github.com/'] },
 
     // Can add more initial lectures here
   ]);
