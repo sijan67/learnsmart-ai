@@ -27,7 +27,8 @@ export default StyleSheet.create({
     },
     title:{
         marginTop: 30,
-        fontSize: 20,
+        fontSize: 50,
+        fontFamily: 'LondrinaShadow_400Regular',
         color: 'black'
     },
     row: {

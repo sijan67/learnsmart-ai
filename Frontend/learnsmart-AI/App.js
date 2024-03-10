@@ -2,6 +2,9 @@ import React from 'react'
 
 import Navigator from './config/navigator';
 import { AppProvider } from './context/AppContext';
+
+// https://github.com/expo/google-fonts
+
 import { useFonts, PlayfairDisplay_400Regular } from '@expo-google-fonts/playfair-display';
 import { Lusitana_400Regular, Lusitana_700Bold } from '@expo-google-fonts/lusitana';
 import { Nobile_400Regular, Nobile_700Bold } from '@expo-google-fonts/nobile';

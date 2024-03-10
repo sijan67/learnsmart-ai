@@ -27,8 +27,9 @@ export default StyleSheet.create({
     },
     title:{
         marginTop: 30,
-        fontSize: 20,
-        color: 'black'
+        fontSize: 45,
+        color: 'black',
+        fontFamily: 'LondrinaShadow_400Regular',
     },
     row: {
         flexDirection: 'row',
