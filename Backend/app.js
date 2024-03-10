@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
+
+
 const port = process.env.PORT || 3001;
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://tliu024:<LearnSmartAI>@cluster.ar9e5a6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster";
+
 
 const client = new MongoClient(uri, {
     serverAPi: {
@@ -22,6 +24,8 @@ async function run() {
         await client.close();
     }
 }
+run().catch(console.dir);
+
 
 app.get('/', (req, res) => {
     res.end("backend page");
