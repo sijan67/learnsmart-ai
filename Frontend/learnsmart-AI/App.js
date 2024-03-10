@@ -9,6 +9,8 @@ import { useFonts, PlayfairDisplay_400Regular } from '@expo-google-fonts/playfai
 import { Lusitana_400Regular, Lusitana_700Bold } from '@expo-google-fonts/lusitana';
 import { Nobile_400Regular, Nobile_700Bold } from '@expo-google-fonts/nobile';
 import { LondrinaShadow_400Regular } from '@expo-google-fonts/londrina-shadow';
+import { Handlee_400Regular } from '@expo-google-fonts/handlee';
+import {  KleeOne_400Regular, KleeOne_600SemiBold } from '@expo-google-fonts/klee-one';
 
 
 import { MD3LightTheme as DefaultTheme, configureFonts, PaperProvider } from 'react-native-paper';
@@ -33,7 +35,10 @@ export default function App() {
       Nobile_700Bold,
       Lusitana_400Regular,
       Lusitana_700Bold,
-      LondrinaShadow_400Regular
+      LondrinaShadow_400Regular,
+      Handlee_400Regular,
+      KleeOne_400Regular, 
+      KleeOne_600SemiBold
     })
     if (!fontsLoaded) {
       return undefined

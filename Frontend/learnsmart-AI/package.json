@@ -9,6 +9,8 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo-google-fonts/handlee": "^0.2.3",
+    "@expo-google-fonts/klee-one": "^0.2.3",
     "@expo-google-fonts/londrina-shadow": "^0.2.3",
     "@expo-google-fonts/lusitana": "^0.2.3",
     "@expo-google-fonts/nobile": "^0.2.3",

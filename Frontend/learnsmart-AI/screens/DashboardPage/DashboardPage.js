@@ -68,7 +68,7 @@ export default function Dashboard() {
         style={styles.textInputContent}
         onChangeText={setLectureContent}
         value={lectureContent}
-        placeholder="Enter Lecture Content "
+        placeholder="Enter Lecture Content To Summarize / Terms to Clarify"
         label="Enter Lecture Content"
         placeholderTextColor="gray"
         multiline={true}
@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#ffffff',
+    fontFamily: 'KleeOne_600SemiBold',
     fontSize: 20,
   },
 });

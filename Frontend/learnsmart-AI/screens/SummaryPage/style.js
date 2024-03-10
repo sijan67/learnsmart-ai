@@ -48,6 +48,7 @@ export default StyleSheet.create({
       },
       buttonText: {
         color: 'white', // Set the text color to white
-        fontSize: 16,
+        fontFamily: 'KleeOne_600SemiBold',
+    fontSize: 20,
       },
 })

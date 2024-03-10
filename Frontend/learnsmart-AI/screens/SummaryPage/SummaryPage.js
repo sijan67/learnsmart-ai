@@ -3,77 +3,43 @@ import { View, Text, Image, TouchableOpacity, SafeAreaView } from 'react-native'
 import style from './style';
 import { useAppContext } from '../../context/AppContext';
 import TreeView from 'react-native-final-tree-view';
+import { List } from 'react-native-paper';
 
 const Summary = ({navigation}) => {
   const { setShowWelcome } = useAppContext();
+  const [expanded, setExpanded] = React.useState(true);
 
-  const state = {
-    data: [
-      {
-        id: 'Parent1',
-        name: 'Parent1',
-        children: [
-          {
-            id: 'child1',
-            name: 'child1',
-            children: [
-              {
-                id: 'child11',
-                name: 'child11',
-                children: [
-                  {
-                    id: 'child111',
-                    name: 'child111',
-                  },
-                ],
-              },
-              {
-                id: 'child12',
-                name: 'child12',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 'Parent2',
-        name: 'Parent2',
-        children: [
-          {
-            id: 'child2',
-            name: 'child2',
-            children: [
-              {
-                id: 'child21',
-                name: 'child21',
-              },
-              {
-                id: 'child22',
-                name: 'child22',
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  };
-
-  const getIndicator = (isExpanded, hasChildrenNodes) => {
-    if (!hasChildrenNodes) {
-      return '*';
-    } else if (isExpanded) {
-      return '-';
-    } else {
-      return '+';
-    }
-  };
-  
+  const handlePress = () => setExpanded(!expanded);
+ 
 
   return (
     <SafeAreaView style={style.container}>
     <Text style={style.title}> Summary History </Text>
 
-    
+    <List.Section title="">
+      <List.Accordion
+        style={{width: 400}}
+        title="Lecture Title"
+        left={props => <List.Icon {...props} icon="book" />}
+        >
+        <List.Section>
+        <List.Subheader>Content: Check </List.Subheader>
+        <List.Subheader>Summary: CheckCheck </List.Subheader>
+        </List.Section>
+      </List.Accordion>
+
+      <List.Accordion
+        style={{width: 400}}
+        title="Lecture Title"
+        left={props => <List.Icon {...props} icon="book" />}
+        >
+        <List.Section>
+        <List.Subheader>Content: Check </List.Subheader>
+        <List.Subheader>Summary: CheckCheck </List.Subheader>
+        </List.Section>
+      </List.Accordion>
+    </List.Section>
+
 
     <TouchableOpacity
         style={style.button}
