@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Keyboard, StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
+import { Keyboard, StyleSheet, View,  TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
 import { Audio } from 'expo-av';
+import { Text, TextInput, Button } from 'react-native-paper';
 
-export default function Dashboard() {
+import { useLecture } from '../../context/LectureContext';
+
+export default function Dashboard({navigation}) {
   const [lectureTitle, setLectureTitle] = useState(''); // For naming the lecture recording
+  const [lectureContent, setLectureContent] = useState(''); // For naming the lecture recording
   const [isRecording, setIsRecording] = useState(false);
   const [recording, setRecording] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+   // Using context to manage lecture data
+  const { updateLectureData , updateLectureSummary} = useLecture();
 
   useEffect(() => {
     (async () => {
@@ -18,6 +25,68 @@ export default function Dashboard() {
       });
     })();
   }, []);
+
+  // Updated function to handle "Clarify More" action
+  const handleClarifyMore = async () => {
+    console.log("inside handle Clarify more")
+    if (lectureContent) {
+      setIsLoading(true);
+      console.log(isLoading)
+      try {
+        const response = await fetch('http://206.87.193.250:3000/api/clarify', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: `Please explain to me how ${lectureContent} works`,
+          }),
+        });
+        const data = await response.json();
+        updateLectureData({ lectureTitle: lectureTitle, lectureContent: lectureContent, clarification: data.text });
+
+        navigation.navigate('Clarify');
+        // Optionally, navigate to a screen that uses this data from context
+        // navigation.navigate('SomeScreenUsingContext');
+      } catch (err) {
+        console.error('Error fetching clarification', err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  const handleSummarize = async () => {
+    if (lectureContent) {
+      setIsLoading(true); // Show loading indicator
+      try {
+        const response = await fetch('http://206.87.193.250:3000/api/summarize', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            text: lectureContent,
+            format: "bullets",
+          }),
+        });
+        const data = await response.json();
+        // Update context with the received summary
+        updateLectureSummary({
+          lectureTitle: lectureTitle,
+          lectureContent: lectureContent,
+          summary: data.summary,
+        });
+  
+        navigation.navigate('Summary'); // Navigate to the Summary page
+      } catch (err) {
+        console.error('Error fetching summary', err);
+      } finally {
+        setIsLoading(false); // Hide loading indicator
+      }
+    }
+  };
+  
 
   const startRecording = async () => {
     setIsLoading(true);
@@ -58,29 +127,65 @@ export default function Dashboard() {
         onChangeText={setLectureTitle}
         value={lectureTitle}
         placeholder="Enter Lecture Title"
+        label="Enter Lecture Title"
         placeholderTextColor="gray"
       />
 
 <TextInput
         style={styles.textInputContent}
-        onChangeText={setLectureTitle}
-        value={lectureTitle}
-        placeholder="Enter Lecture Content "
+        onChangeText={setLectureContent}
+        value={lectureContent}
+        placeholder="Enter Lecture Content To Summarize / Terms to Clarify"
+        label="Enter Lecture Content"
         placeholderTextColor="gray"
+        multiline={true}
+        blurOnSubmit={true}
       />
-      <TouchableOpacity
-        style={styles.button}
-      >
-        <Text style={styles.buttonText}>Clarify More</Text>
-      </TouchableOpacity>
+
+{isLoading ? (
+  <>
+
+  <ActivityIndicator size="large" color="#9DD9D2" />
+  <Text >Getting Result</Text>
+  </>
+  
+) : (
+
+  <>
+ 
+ <TouchableOpacity
+  style={styles.button}
+  onPress={handleClarifyMore}
+>
+  <Text style={styles.buttonText}>Clarify More</Text>
+</TouchableOpacity>
+
+
+<TouchableOpacity
+  style={styles.button}
+  onPress={handleSummarize} // Updated to use handleSummarize
+>
+  <Text style={styles.buttonText}>Summarize</Text>
+</TouchableOpacity>
+  
+  </>
+)}
+
+
+{/* {isLoading ? (
+  <ActivityIndicator size="large" color="#9DD9D2" />
+) : (
 
       <TouchableOpacity
         style={styles.button}
+        onPress={() => {
+          navigation.navigate('Summary');
+        }}
       >
-        <Text style={styles.buttonText}>Visualize</Text>
+        <Text style={styles.buttonText}>Summarize</Text>
       </TouchableOpacity>
 
-      {isLoading && <ActivityIndicator size="large" color="#9DD9D2" />}
+)} */}
 
       {/* Placeholder for future features: Clarify More and Visualize Functionality */}
     </View>
@@ -96,7 +201,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   headerText: {
-    fontSize: 24,
+    fontFamily: 'LondrinaShadow_400Regular',
+    fontSize: 50,
     fontWeight: 'bold',
     marginBottom: 20,
   },
@@ -110,7 +216,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   textInputContent: {
-    height: 200,
+    height: 100,
     borderColor: 'gray',
     borderWidth: 1,
     width: '90%',
@@ -121,12 +227,13 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#2B8BB7',
     paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingVertical: 15,
     borderRadius: 5,
     marginVertical: 10,
   },
   buttonText: {
     color: '#ffffff',
-    fontSize: 16,
+    fontFamily: 'KleeOne_600SemiBold',
+    fontSize: 20,
   },
 });

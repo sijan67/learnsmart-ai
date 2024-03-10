@@ -9,19 +9,22 @@ export default StyleSheet.create({
     appName:{
         fontSize: 38,
         fontWeight: 'bold',
-        color: "#2B8BB7"
+        color: "#2B8BB7",
+        fontFamily: 'Lusitana_700Bold',
 
     },
     appQuote:{
-        fontSize: 18,
+        fontSize: 20,
         marginTop: "5%",
-        color: "#2B8BB7"
+        color: "#2B8BB7",
+        fontFamily: 'KleeOne_600SemiBold',
 
     },
     appQuote2:{
-        fontSize: 18,
+        fontSize: 20,
         marginTop: "1%",
-        color: "#2B8BB7"
+        color: "#2B8BB7",
+        fontFamily: 'KleeOne_600SemiBold',
 
     },
     yellowButton: {
@@ -34,7 +37,8 @@ export default StyleSheet.create({
     },
     buttonText:{
         fontSize: 20,
-        color: '#CCE1F6'
+        color: '#CCE1F6',
+        fontFamily: 'KleeOne_600SemiBold',
 
     },
     welcomeImage:{
