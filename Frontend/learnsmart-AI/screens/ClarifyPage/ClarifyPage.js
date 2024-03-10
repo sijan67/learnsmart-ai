@@ -4,20 +4,25 @@ import style from './style';
 import { useAppContext } from '../../context/AppContext';
 import TreeView from 'react-native-final-tree-view';
 import { List } from 'react-native-paper';
+import { useLecture } from '../../context/LectureContext';
 
-const Clarify = ({navigation,  route}) => {
+const Clarify = ({navigation}) => {
   const { setShowWelcome } = useAppContext();
   const [expanded, setExpanded] = React.useState(true);
 
   const handlePress = () => setExpanded(!expanded);
-  const { lectureTitle, lectureContent, clarification } = route.params;
+
  
+  const { lectureData } = useLecture();
+  // Use lectureData here
+  // const { lectureTitle, lectureContent, clarification } = lectureData;
+  
 
   return (
     <SafeAreaView style={style.container}>
     <Text style={style.title}> Clarification History </Text>
 
-    <List.Section title="">
+    {/* <List.Section title="">
     {lectureTitle && (
       <List.Accordion
         style={{width: 400}}
@@ -31,31 +36,24 @@ const Clarify = ({navigation,  route}) => {
       </List.Section>
     </List.Accordion>
   )}
-</List.Section>
+</List.Section> */}
+ <List.Section title="">
+        {lectureData.map((lecture, index) => (
+          <List.Accordion
+            style={{width: 400}}
+            key={index} // Using index as a key; consider changing if the list is dynamic
+            title={lecture.lectureTitle}
+            left={props => <List.Icon {...props} icon="book" />}
+          >
+            <List.Section>
+              <List.Subheader>Term: {lecture.lectureContent}</List.Subheader>
+              <List.Subheader>Clarification: {lecture.clarification}</List.Subheader>
+            </List.Section>
+          </List.Accordion>
+        ))}
+      </List.Section>
 
-    <List.Section title="">
-      <List.Accordion
-        style={{width: 400}}
-        title="Lecture Title"
-        left={props => <List.Icon {...props} icon="book" />}
-        >
-        <List.Section>
-        <List.Subheader>Term: Check </List.Subheader>
-        <List.Subheader>Clarification: CheckCheck check check check cehck check check </List.Subheader>
-        </List.Section>
-      </List.Accordion>
 
-      <List.Accordion
-        style={{width: 400}}
-        title="Lecture Title"
-        left={props => <List.Icon {...props} icon="book" />}
-        >
-        <List.Section>
-        <List.Subheader>Content: Check </List.Subheader>
-        <List.Subheader>Summary: CheckCheck </List.Subheader>
-        </List.Section>
-      </List.Accordion>
-    </List.Section>
 
 
     <TouchableOpacity

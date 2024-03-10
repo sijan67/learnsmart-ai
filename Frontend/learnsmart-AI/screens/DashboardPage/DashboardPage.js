@@ -3,12 +3,17 @@ import { Keyboard, StyleSheet, View,  TouchableOpacity, ActivityIndicator, Scrol
 import { Audio } from 'expo-av';
 import { Text, TextInput, Button } from 'react-native-paper';
 
+import { useLecture } from '../../context/LectureContext';
+
 export default function Dashboard({navigation}) {
   const [lectureTitle, setLectureTitle] = useState(''); // For naming the lecture recording
   const [lectureContent, setLectureContent] = useState(''); // For naming the lecture recording
   const [isRecording, setIsRecording] = useState(false);
   const [recording, setRecording] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+   // Using context to manage lecture data
+  const { updateLectureData } = useLecture();
 
   useEffect(() => {
     (async () => {
@@ -20,6 +25,37 @@ export default function Dashboard({navigation}) {
       });
     })();
   }, []);
+
+  // Updated function to handle "Clarify More" action
+  const handleClarifyMore = async () => {
+    console.log("inside handle Clarify more")
+    if (lectureContent) {
+      setIsLoading(true);
+      console.log(isLoading)
+      try {
+        const response = await fetch('http://206.87.193.250:3000/api/clarify', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: `Please explain to me how ${lectureContent} works`,
+          }),
+        });
+        const data = await response.json();
+        updateLectureData({ lectureTitle: lectureTitle, lectureContent: lectureContent, clarification: data.text });
+
+        navigation.navigate('Clarify');
+        // Optionally, navigate to a screen that uses this data from context
+        // navigation.navigate('SomeScreenUsingContext');
+      } catch (err) {
+        console.error('Error fetching clarification', err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
 
   const startRecording = async () => {
     setIsLoading(true);
@@ -122,34 +158,14 @@ export default function Dashboard({navigation}) {
 ) : (
 
   <>
-  
-  <TouchableOpacity
-    style={styles.button}
-    onPress={async () => {
-      if (lectureContent) {
-        setIsLoading(true);
-        try {
-          const response = await fetch('http://206.87.193.250:3000/api/clarify', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              message: `Please explain to me how ${lectureContent} works`,
-            }),
-          });
-          const data = await response.json();
-          navigation.navigate('Clarify', { lectureTitle, lectureContent, clarification: data.text });
-        } catch (err) {
-          console.error('Error fetching clarification', err);
-        } finally {
-          setIsLoading(false);
-        }
-      }
-    }}
-  >
-    <Text style={styles.buttonText}>Clarify More</Text>
-  </TouchableOpacity>
+ 
+ <TouchableOpacity
+  style={styles.button}
+  onPress={handleClarifyMore}
+>
+  <Text style={styles.buttonText}>Clarify More</Text>
+</TouchableOpacity>
+
 
   <TouchableOpacity
         style={styles.button}

@@ -15,7 +15,8 @@ import {  KleeOne_400Regular, KleeOne_600SemiBold } from '@expo-google-fonts/kle
 
 import { MD3LightTheme as DefaultTheme, configureFonts, PaperProvider } from 'react-native-paper';
 
- 
+
+import { LectureProvider } from './context/LectureContext';
 
 const theme = {
    ...DefaultTheme,
@@ -46,9 +47,12 @@ export default function App() {
 
   return (
    <AppProvider>
-   <PaperProvider theme={theme}>
+      <LectureProvider>
+      <PaperProvider theme={theme}>
      <Navigator/>
   </PaperProvider>
+
+      </LectureProvider>
   </AppProvider>
   );
   }
