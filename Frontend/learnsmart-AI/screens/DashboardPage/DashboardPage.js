@@ -4,6 +4,7 @@ import { Audio } from 'expo-av';
 
 export default function Dashboard() {
   const [lectureTitle, setLectureTitle] = useState(''); // For naming the lecture recording
+  const [lectureContent, setLectureContent] = useState(''); // For naming the lecture recording
   const [isRecording, setIsRecording] = useState(false);
   const [recording, setRecording] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -63,11 +64,15 @@ export default function Dashboard() {
 
 <TextInput
         style={styles.textInputContent}
-        onChangeText={setLectureTitle}
-        value={lectureTitle}
+        onChangeText={setLectureContent}
+        value={lectureContent}
         placeholder="Enter Lecture Content "
         placeholderTextColor="gray"
+        multiline={true}
+        blurOnSubmit={true}
       />
+
+
       <TouchableOpacity
         style={styles.button}
       >
@@ -110,7 +115,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   textInputContent: {
-    height: 200,
+    height: 150,
     borderColor: 'gray',
     borderWidth: 1,
     width: '90%',
