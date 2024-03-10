@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import style from './style';
 import { useAppContext } from '../../context/AppContext';
+import TreeView from 'react-native-final-tree-view';
 
-const Profile = ({navigation}) => {
+const Clarify = ({navigation}) => {
   const { setShowWelcome } = useAppContext();
+ 
 
   return (
     <SafeAreaView style={style.container}>
-    <Text style={style.title}> Profile </Text>
+    <Text style={style.title}> Clarification History </Text>
+
 
     <TouchableOpacity
         style={style.button}
@@ -24,4 +27,4 @@ const Profile = ({navigation}) => {
   
 };
 
-export default Profile;
+export default Clarify;

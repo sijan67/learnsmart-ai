@@ -77,7 +77,7 @@ export default function Dashboard() {
       <TouchableOpacity
         style={styles.button}
       >
-        <Text style={styles.buttonText}>Visualize</Text>
+        <Text style={styles.buttonText}>Summarize</Text>
       </TouchableOpacity>
 
       {isLoading && <ActivityIndicator size="large" color="#9DD9D2" />}

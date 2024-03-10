@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import Dashboard from '../screens/DashboardPage/DashboardPage';
-import Map from '../screens/ProfilePage/ProfilePage';
+import Clarify from '../screens/ProfilePage/ProfilePage';
+import Summary from '../screens/SummaryPage/SummaryPage';
 import WelcomeScreen from '../screens/WelcomePage/WelcomePage';
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -40,10 +41,16 @@ function Home() {
               <MaterialCommunityIcons name="view-dashboard" color={color} size={26}/>
             ),
         }}/>
-        <Tab.Screen name="Map" component={Map}
+        <Tab.Screen name="Clarify" component={Clarify}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="account" color={color} size={26}/>
+              <MaterialCommunityIcons name="text-search" color={color} size={26}/>
+            ),
+        }}/>
+         <Tab.Screen name="Summary" component={Summary}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="note-multiple" color={color} size={26}/>
             ),
         }}/>
     </Tab.Navigator>
