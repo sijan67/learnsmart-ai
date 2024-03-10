@@ -5,16 +5,33 @@ import { useAppContext } from '../../context/AppContext';
 import TreeView from 'react-native-final-tree-view';
 import { List } from 'react-native-paper';
 
-const Clarify = ({navigation}) => {
+const Clarify = ({navigation,  route}) => {
   const { setShowWelcome } = useAppContext();
   const [expanded, setExpanded] = React.useState(true);
 
   const handlePress = () => setExpanded(!expanded);
+  const { lectureTitle, lectureContent, clarification } = route.params;
  
 
   return (
     <SafeAreaView style={style.container}>
     <Text style={style.title}> Clarification History </Text>
+
+    <List.Section title="">
+    {lectureTitle && (
+      <List.Accordion
+        style={{width: 400}}
+        title={lectureTitle}
+        left={props => <List.Icon {...props} icon="book" />}
+      >
+
+      <List.Section style={{width: 300, height: 200}}>
+        <List.Subheader>Term: {lectureContent} </List.Subheader>
+        <List.Subheader>Clarification: {clarification} </List.Subheader>
+      </List.Section>
+    </List.Accordion>
+  )}
+</List.Section>
 
     <List.Section title="">
       <List.Accordion
@@ -24,7 +41,7 @@ const Clarify = ({navigation}) => {
         >
         <List.Section>
         <List.Subheader>Term: Check </List.Subheader>
-        <List.Subheader>Clarification: CheckCheck </List.Subheader>
+        <List.Subheader>Clarification: CheckCheck check check check cehck check check </List.Subheader>
         </List.Section>
       </List.Accordion>
 

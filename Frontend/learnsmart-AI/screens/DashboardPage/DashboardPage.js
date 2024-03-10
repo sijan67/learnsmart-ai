@@ -76,15 +76,97 @@ export default function Dashboard({navigation}) {
       />
 
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.button}
         onPress={() => {
           navigation.navigate('Clarify');
         }}
       >
         <Text style={styles.buttonText}>Clarify More</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
+      {/* <TouchableOpacity
+        style={styles.button}
+        onPress={async () => {
+          if (lectureContent) {
+            setIsLoading(true);
+            try {
+              const response = await fetch('http://206.87.193.250:3000/api/clarify', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  message: `Please explain to me how ${lectureContent} works`,
+                }),
+              });
+              const data = await response.json();
+              navigation.navigate('Clarify', { lectureTitle, lectureContent, clarification: data.text });
+            } catch (err) {
+              console.error('Error fetching clarification', err);
+            } finally {
+              setIsLoading(false);
+            }
+          }
+        }}
+      >
+        <>
+        
+        <Text style={styles.buttonText}>Clarify More</Text>
+        </>
+       
+      </TouchableOpacity> */}
+
+{isLoading ? (
+  <ActivityIndicator size="large" color="#9DD9D2" />
+) : (
+
+  <>
+  
+  <TouchableOpacity
+    style={styles.button}
+    onPress={async () => {
+      if (lectureContent) {
+        setIsLoading(true);
+        try {
+          const response = await fetch('http://206.87.193.250:3000/api/clarify', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              message: `Please explain to me how ${lectureContent} works`,
+            }),
+          });
+          const data = await response.json();
+          navigation.navigate('Clarify', { lectureTitle, lectureContent, clarification: data.text });
+        } catch (err) {
+          console.error('Error fetching clarification', err);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    }}
+  >
+    <Text style={styles.buttonText}>Clarify More</Text>
+  </TouchableOpacity>
+
+  <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate('Summary');
+        }}
+      >
+        <Text style={styles.buttonText}>Summarize</Text>
+  </TouchableOpacity>
+  
+  </>
+)}
+
+
+{/* {isLoading ? (
+  <ActivityIndicator size="large" color="#9DD9D2" />
+) : (
 
       <TouchableOpacity
         style={styles.button}
@@ -95,7 +177,7 @@ export default function Dashboard({navigation}) {
         <Text style={styles.buttonText}>Summarize</Text>
       </TouchableOpacity>
 
-      {isLoading && <ActivityIndicator size="large" color="#9DD9D2" />}
+)} */}
 
       {/* Placeholder for future features: Clarify More and Visualize Functionality */}
     </View>

@@ -17,27 +17,28 @@ const Summary = ({navigation}) => {
     <Text style={style.title}> Summary History </Text>
 
     <List.Section title="">
-      <List.Accordion
-        style={{width: 400}}
-        title="Lecture Title"
-        left={props => <List.Icon {...props} icon="book" />}
-        >
-        <List.Section>
-        <List.Subheader>Content: Check </List.Subheader>
-        <List.Subheader>Summary: CheckCheck </List.Subheader>
-        </List.Section>
-      </List.Accordion>
 
       <List.Accordion
         style={{width: 400}}
-        title="Lecture Title"
-        left={props => <List.Icon {...props} icon="book" />}
+        title="Lecture 3Lecture 3Lecture 3Lecture 3Lecture 3Lecture 3 "
+        titleNumberOfLines={3}
+
+        left={props => <List.Icon {...props} icon="book" />
+      }
         >
-        <List.Section>
-        <List.Subheader>Content: Check </List.Subheader>
-        <List.Subheader>Summary: CheckCheck </List.Subheader>
-        </List.Section>
+        <List.Item         
+        titleNumberOfLines={15}
+        title="Content: Lecture 3Lecture 3Lecturre3Lecturre3Lecturre3Lecturre 3Lecture3Lecture3Lecture3Lecture3Lecture3Lecture3Lecture3Lecture3Lecture3Lecture3Lecture3Lecture 3 "
+        >
+        </List.Item>
+        
+        <List.Item         
+        titleNumberOfLines={15}
+        title="Summary: Lecture 3Lecture 3Lecturre3Lecturre3Lecturre3Lecturre 3Lecture3Lecture3Lecture3Lecture3Lecture3Lecture3Lecture3Lecture3Lecture3Lecture3Lecture3Lecture 3 "
+        >
+        </List.Item>
       </List.Accordion>
+
     </List.Section>
 
 

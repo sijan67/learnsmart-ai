@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Dashboard from '../screens/DashboardPage/DashboardPage';
-import Clarify from '../screens/ProfilePage/ProfilePage';
+import Clarify from '../screens/ClarifyPage/ClarifyPage';
 import Summary from '../screens/SummaryPage/SummaryPage';
 import WelcomeScreen from '../screens/WelcomePage/WelcomePage';
 
