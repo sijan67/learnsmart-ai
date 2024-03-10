@@ -13,7 +13,7 @@ export default function Dashboard({navigation}) {
   const [isLoading, setIsLoading] = useState(false);
 
    // Using context to manage lecture data
-  const { updateLectureData } = useLecture();
+  const { updateLectureData , updateLectureSummary} = useLecture();
 
   useEffect(() => {
     (async () => {
@@ -56,6 +56,37 @@ export default function Dashboard({navigation}) {
     }
   };
 
+  const handleSummarize = async () => {
+    if (lectureContent) {
+      setIsLoading(true); // Show loading indicator
+      try {
+        const response = await fetch('http://206.87.193.250:3000/api/summarize', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            text: lectureContent,
+            format: "bullets",
+          }),
+        });
+        const data = await response.json();
+        // Update context with the received summary
+        updateLectureSummary({
+          lectureTitle: lectureTitle,
+          lectureContent: lectureContent,
+          summary: data.summary,
+        });
+  
+        navigation.navigate('Summary'); // Navigate to the Summary page
+      } catch (err) {
+        console.error('Error fetching summary', err);
+      } finally {
+        setIsLoading(false); // Hide loading indicator
+      }
+    }
+  };
+  
 
   const startRecording = async () => {
     setIsLoading(true);
@@ -130,14 +161,12 @@ export default function Dashboard({navigation}) {
 </TouchableOpacity>
 
 
-  <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate('Summary');
-        }}
-      >
-        <Text style={styles.buttonText}>Summarize</Text>
-  </TouchableOpacity>
+<TouchableOpacity
+  style={styles.button}
+  onPress={handleSummarize} // Updated to use handleSummarize
+>
+  <Text style={styles.buttonText}>Summarize</Text>
+</TouchableOpacity>
   
   </>
 )}
