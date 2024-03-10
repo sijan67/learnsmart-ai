@@ -3,7 +3,7 @@ const app = express();
 
 // Cohere Endpoint Integration
 const { CohereClient } = require('cohere-ai');
-const cohere = new CohereClient({ token: 'EKNlx6cj9zOgx4Nl637wturE22F56cAIJmxVc1kF' });
+const cohere = new CohereClient({ token: 'j9xdoqr7lQIQN5ac1FavpsiasdhyXy2oOAGfHO5D' });
 
 const PORT = process.env.PORT || 3000;
 
