@@ -2,7 +2,7 @@ const Lecture = require('../models/Lecture');
 const speechToText = require('../models/speechToText');
 
 //create speechtotext to add to the lecture's list
-const addSpeechToText = async (req, res) => {
+exports.addSpeechToText = async (req, res) => {
     if (!req.body.lecture_id) {
         res.status(401).json({message: "lecture_id is missing"});
     }

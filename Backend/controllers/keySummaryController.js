@@ -3,7 +3,7 @@ const keySummary = require('../models/keySummary');
 
 
 //create speechtotext to add to the lecture's list
-const addKeySummary = async (req, res) => {
+exports.addKeySummary = async (req, res) => {
     if (!req.body.lecture_id) {
         res.status(401).json({message: "lecture_id is missing"});
     }

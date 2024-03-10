@@ -16,14 +16,14 @@ exports.addLecture = async(req, res) => {
 }
 
 //implement the retrieve lecture action
-// exports.getLecture = async(req, res) => {
-//     try {
-//         const lectures = await Lecture.find({});
-//         res.json(lectures);
-//     } catch (error) {
-//         res.status(500).json({message: error.message});
-//     }
+exports.getLecture = async(req, res) => {
+    try {
+        const lectures = await Lecture.find({});
+        res.json(lectures);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
     
-// } 
+} 
 
 
