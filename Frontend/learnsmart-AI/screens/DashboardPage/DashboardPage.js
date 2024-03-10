@@ -3,7 +3,7 @@ import { Keyboard, StyleSheet, View,  TouchableOpacity, ActivityIndicator, Scrol
 import { Audio } from 'expo-av';
 import { Text, TextInput, Button } from 'react-native-paper';
 
-export default function Dashboard() {
+export default function Dashboard({navigation}) {
   const [lectureTitle, setLectureTitle] = useState(''); // For naming the lecture recording
   const [lectureContent, setLectureContent] = useState(''); // For naming the lecture recording
   const [isRecording, setIsRecording] = useState(false);
@@ -76,9 +76,11 @@ export default function Dashboard() {
       />
 
 
-
       <TouchableOpacity
         style={styles.button}
+        onPress={() => {
+          navigation.navigate('Clarify');
+        }}
       >
         <Text style={styles.buttonText}>Clarify More</Text>
       </TouchableOpacity>
@@ -86,6 +88,9 @@ export default function Dashboard() {
 
       <TouchableOpacity
         style={styles.button}
+        onPress={() => {
+          navigation.navigate('Summary');
+        }}
       >
         <Text style={styles.buttonText}>Summarize</Text>
       </TouchableOpacity>
