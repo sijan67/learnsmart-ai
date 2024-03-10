@@ -38,17 +38,60 @@ app.post('/api/summarize', async (req, res) => {
 
 
 // Define a POST endpoint for clarification using generate endpoint 
-app.post('/api/clarify', async (req, res) => {
-    const { prompt } = req.body;
-    console.log("Prompt is: ", prompt);
+// app.post('/api/clarify', async (req, res) => {
+//     const { prompt } = req.body;
+//     console.log("Prompt is: ", prompt);
 
-  if (!prompt) {
+//   if (!prompt) {
+//     return res.status(400).json({ message: 'No text provided for clarification.' });
+//   }
+
+//   try {
+//     const summary = await cohere.generate({ prompt: prompt , model: 'command-light'});
+//     res.json( summary );
+
+//   } catch (error) {
+//     console.error('Error clarifying text:', error);
+//     res.status(500).json({ message: 'Failed to clarify the text.' });
+//   }
+
+// });
+
+
+
+// return links to where the answers are generated from 
+app.post('/api/clarify', async (req, res) => {
+    const { message } = req.body;
+    console.log("Message is: ", message);
+
+  if (!message) {
     return res.status(400).json({ message: 'No text provided for clarification.' });
   }
 
   try {
-    const summary = await cohere.generate({ prompt: prompt , model: 'command-light'});
-    res.json( summary );
+ 
+    const chatStream = await cohere.chat({
+        chatHistory: [],
+        message: message,
+        // perform web search before answering the question. You can also use your own custom connector.
+        connectors: [{ id: "web-search" }],
+        model: "command-light",
+        stream: false,
+  
+    });
+
+    // Extracting only the required information from the response
+    const simplifiedResponse = {
+        text: chatStream.text,
+        documents: chatStream.documents.map(doc => ({
+            title: doc.title,
+            url: doc.url
+        }))
+    };
+
+    res.json(simplifiedResponse);
+
+    // res.json( chatStream );
 
   } catch (error) {
     console.error('Error clarifying text:', error);
@@ -56,6 +99,7 @@ app.post('/api/clarify', async (req, res) => {
   }
 
 });
+
 
 
 app.listen(PORT, () => {
