@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Keyboard, StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
+import { Keyboard, StyleSheet, View,  TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
 import { Audio } from 'expo-av';
-import { TextInput } from 'react-native-paper';
+import { Text, TextInput, Button } from 'react-native-paper';
 
 export default function Dashboard() {
   const [lectureTitle, setLectureTitle] = useState(''); // For naming the lecture recording
@@ -60,6 +60,7 @@ export default function Dashboard() {
         onChangeText={setLectureTitle}
         value={lectureTitle}
         placeholder="Enter Lecture Title"
+        label="Enter Lecture Title"
         placeholderTextColor="gray"
       />
 
@@ -68,10 +69,12 @@ export default function Dashboard() {
         onChangeText={setLectureContent}
         value={lectureContent}
         placeholder="Enter Lecture Content "
+        label="Enter Lecture Content"
         placeholderTextColor="gray"
         multiline={true}
         blurOnSubmit={true}
       />
+
 
 
       <TouchableOpacity
@@ -79,6 +82,7 @@ export default function Dashboard() {
       >
         <Text style={styles.buttonText}>Clarify More</Text>
       </TouchableOpacity>
+
 
       <TouchableOpacity
         style={styles.button}
@@ -102,7 +106,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   headerText: {
-    fontSize: 24,
+    fontFamily: 'LondrinaShadow_400Regular',
+    fontSize: 50,
     fontWeight: 'bold',
     marginBottom: 20,
   },
@@ -127,12 +132,12 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#2B8BB7',
     paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingVertical: 15,
     borderRadius: 5,
     marginVertical: 10,
   },
   buttonText: {
     color: '#ffffff',
-    fontSize: 16,
+    fontSize: 20,
   },
 });
