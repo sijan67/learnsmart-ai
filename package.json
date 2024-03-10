@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "expo-av": "^13.10.5",
+    "react-native-final-tree-view": "^3.0.0"
+  }
+}
